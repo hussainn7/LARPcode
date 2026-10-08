@@ -457,6 +457,31 @@ svg { display: block; flex: none; }
 .tb-effort { margin-left: 14px; }
 .tb-ring { width: 14px; height: 14px; margin-left: 12px; color: var(--t4); }
 
+/* ---------------------------------------------------- edit affordances */
+/* Only while editing; screenshot mode drops the .editing class. */
+
+.editing #app [data-stat],
+.editing #app [data-edit] {
+  cursor: text;
+  border-radius: 3px;
+  outline: 1px dashed transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.12s;
+}
+.editing #app [data-stat]:hover,
+.editing #app [data-edit]:hover { outline-color: rgba(217, 119, 87, 0.6); }
+.editing #app [contenteditable] {
+  outline: 1px solid var(--clay) !important;
+  caret-color: var(--clay);
+  text-overflow: clip;
+}
+.editing #app [contenteditable]::selection { background: rgba(217, 119, 87, 0.35); }
+
+.editing #app { user-select: none; -webkit-user-select: none; }
+.editing #app [contenteditable] { user-select: text; -webkit-user-select: text; }
+.editing .heat { touch-action: none; cursor: crosshair; }
+.editing .heat i:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55); }
+
 /* ------------------------------------------------------------ responsive */
 
 .hide-sidebar .sidebar { display: none; }

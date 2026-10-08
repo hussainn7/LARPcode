@@ -1,6 +1,7 @@
 import { store } from './state.js';
 import { renderShell } from './render.js';
 import { renderCard } from './card.js';
+import './edit.js';
 
 function render(state) {
   renderShell(state);
@@ -17,5 +18,6 @@ document.getElementById('card').addEventListener('click', (e) => {
   });
 });
 
+document.body.classList.add('editing');
 store.subscribe(render);
 render(store.state);
