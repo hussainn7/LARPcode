@@ -5,8 +5,9 @@
 
 :root {
   /* Anthropic Sans is proprietary; Hanken Grotesk is the closest free
-     match (glyph width within 0.1%, x-height within 1.5%). If a viewer
-     happens to have Anthropic Sans installed, it wins. */
+     match (glyph width within 0.1%, x-height within 1.5%). It sets a
+     touch small in practice, so every font size here is scaled up 3%.
+     If a viewer happens to have Anthropic Sans installed, it wins. */
   --font-sans: "Anthropic Sans", "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --bg-main: #151515;
@@ -85,7 +86,7 @@ svg { display: block; flex: none; }
   flex-direction: column;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--line);
-  font-size: 13px;
+  font-size: 13.4px;
   line-height: 18px;
   user-select: none;
 }
@@ -95,7 +96,7 @@ svg { display: block; flex: none; }
   flex: none;
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  padding: 2px 0 0 10px;
 }
 
 .traffic { display: none; gap: 8px; margin: 0 14px 0 4px; }
@@ -162,7 +163,7 @@ svg { display: block; flex: none; }
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  padding: 21px 8px 24px;
+  padding: 22px 8px 24px;
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
           mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
 }
@@ -174,7 +175,7 @@ svg { display: block; flex: none; }
   display: flex;
   align-items: center;
   padding: 0 5px 0 6px;
-  font-size: 12px;
+  font-size: 12.4px;
   color: #878787;
 }
 .sb-section-head > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -232,12 +233,12 @@ svg { display: block; flex: none; }
   place-items: center;
   background: #292929;
   color: #c9c9c6;
-  font-size: 10px;
+  font-size: 10.3px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-.sb-user-name { color: #c2c3c0; font-size: 13px; }
-.sb-user-plan { color: #858585; font-size: 12px; margin-left: -2px; }
+.sb-user-name { color: #c2c3c0; font-size: 13.4px; }
+.sb-user-plan { color: #858585; font-size: 12.4px; margin-left: -2px; }
 .sb-user-chev { width: 12px; height: 12px; color: #858585; margin-left: 2px; }
 .sb-user-spark { width: 15px; height: 15px; color: #5c5c5a; margin-left: auto; margin-right: 1px; }
 
@@ -267,19 +268,112 @@ svg { display: block; flex: none; }
   align-items: center;
   gap: 6px;
   margin: 0;
-  font-size: 20px;
+  font-size: 20.6px;
   line-height: 28px;
   font-weight: 400;
   color: var(--t1);
 }
 .greeting .spark { width: 22px; height: 22px; color: var(--clay); }
 
+/* ----------------------------------------------------------- stats card */
+
+.card {
+  width: 480px;
+  max-width: 100%;
+  margin-top: 46px;
+  padding: 8px 12px 12px;
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.card-head {
+  height: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pills { display: flex; gap: 2.5px; }
+
+.pill {
+  appearance: none;
+  height: 20px;
+  margin: 0;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--t3);
+  font: inherit;
+  font-size: 12.4px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.pill.is-on { background: var(--pill); color: var(--t1); }
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.tile {
+  height: 44px;
+  padding: 3px 4px 0;
+  border-radius: 4px;
+  background: var(--tile);
+  overflow: hidden;
+}
+.tile-label {
+  font-size: 12.4px;
+  line-height: 18px;
+  color: var(--t3);
+  white-space: nowrap;
+}
+.tile-value {
+  font-size: 13.4px;
+  line-height: 19px;
+  font-weight: 600;
+  color: var(--t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tile-value.is-text { font-weight: 400; }
+
+.heat {
+  display: grid;
+  grid-template-columns: repeat(26, minmax(0, 1fr));
+  grid-template-rows: repeat(7, auto);
+  grid-auto-flow: column;
+  gap: 3px;
+  margin-top: 6px;
+}
+.heat i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--heat-0);
+}
+.heat i[data-l="1"] { background: var(--heat-1); }
+.heat i[data-l="2"] { background: var(--heat-2); }
+.heat i[data-l="3"] { background: var(--heat-3); }
+.heat i[data-l="4"] { background: var(--heat-4); }
+
+.fact {
+  margin: 10.5px 0 0;
+  font-size: 11.3px;
+  line-height: 16px;
+  color: var(--t3);
+}
+
 /* ------------------------------------------------------------- composer */
 
 .composer-area {
   margin-top: auto;
   padding-top: 40px;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 }
 
 .chips {
@@ -296,7 +390,7 @@ svg { display: block; flex: none; }
   border-radius: 6px;
   background: var(--chip);
   color: #bebebc;
-  font-size: 13px;
+  font-size: 13.4px;
   white-space: nowrap;
 }
 .chip svg { width: 14px; height: 14px; }
@@ -315,7 +409,7 @@ svg { display: block; flex: none; }
 .composer-input {
   flex: 1;
   min-width: 0;
-  font-size: 14px;
+  font-size: 14.4px;
   line-height: 20px;
   color: #8b8b89;
   white-space: nowrap;
@@ -325,7 +419,7 @@ svg { display: block; flex: none; }
 
 .clawd {
   position: absolute;
-  right: 6px;
+  right: 5px;
   bottom: 100%;
   width: 36px;
   height: 24px;
@@ -346,12 +440,12 @@ svg { display: block; flex: none; }
 
 .toolbar {
   height: 32px;
-  margin-top: 2px;
+  margin-top: 1px;
   display: flex;
   align-items: center;
   padding: 0 12px 0 9px;
   color: #c2c2bf;
-  font-size: 12px;
+  font-size: 12.4px;
   white-space: nowrap;
 }
 .tb-icon { width: 16px; height: 16px; }
