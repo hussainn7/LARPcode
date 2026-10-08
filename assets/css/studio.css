@@ -382,6 +382,52 @@ select.st-input option { background: #242423; color: var(--t1); }
 }
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
+/* ----------------------------------------------------------- star nudge */
+
+.star-nudge {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60;
+  width: min(400px, calc(100vw - 32px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px 12px 14px;
+  border: 1px solid rgba(217, 119, 87, 0.4);
+  border-radius: 12px;
+  background: #1f1e1d;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  color: var(--t1);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.star-nudge.is-on { opacity: 1; transform: none; }
+.shot .star-nudge { display: none; }
+.star-nudge .st-clawd { width: 30px; height: 20px; flex: none; }
+.star-nudge-text { display: flex; flex-direction: column; min-width: 0; }
+.star-nudge-text span { color: var(--t3); }
+.star-nudge-btn {
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 11px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--clay);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.star-nudge-btn svg { width: 14px; height: 14px; fill: currentColor; }
+.star-nudge .st-iconbtn { margin: 0; }
+.star-nudge .st-iconbtn svg { width: 16px; height: 16px; }
+
 /* ------------------------------------------------------------- launcher */
 
 .st-launch {

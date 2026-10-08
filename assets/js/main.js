@@ -2,7 +2,7 @@ import { store } from './state.js';
 import { renderShell } from './render.js';
 import { renderCard } from './card.js';
 import { initStudio, setOpen, isOpen } from './studio.js';
-import { toggleShot, exitShot, inShot, loadFromHash } from './share.js';
+import { toggleShot, enterShot, exitShot, inShot, loadFromHash } from './share.js';
 import './edit.js';
 
 function render(state) {
@@ -35,3 +35,6 @@ render(store.state);
 initStudio();
 loadFromHash();
 window.addEventListener('hashchange', loadFromHash);
+
+// ?shot opens straight into screenshot mode (handy for share previews).
+if (new URLSearchParams(location.search).has('shot')) enterShot({ quiet: true });

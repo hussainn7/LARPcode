@@ -23,11 +23,11 @@ export function toast(message, ms = 2200) {
 
 export const inShot = () => document.body.classList.contains('shot');
 
-export function enterShot() {
+export function enterShot({ quiet = false } = {}) {
   document.activeElement?.blur?.();
   document.body.classList.add('shot');
   document.body.classList.remove('editing');
-  toast('Screenshot mode. Esc or double-click to exit.', 1600);
+  if (!quiet) toast('Screenshot mode. Esc or double-click to exit.', 1600);
 }
 
 export function exitShot() {

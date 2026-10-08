@@ -292,8 +292,8 @@ function onClick(e) {
   } else if (action === 'close') setOpen(false);
   else if (action === 'shot') enterShot();
   else if (action === 'fullscreen') fullscreenShot();
-  else if (action === 'png-card') exportPng('card');
-  else if (action === 'link') copyShareLink();
+  else if (action === 'png-card') exportPng('card').then(() => setTimeout(nudgeStar, 1200));
+  else if (action === 'link') copyShareLink().then(() => setTimeout(nudgeStar, 1600));
 }
 
 function onInput(e) {
@@ -347,6 +347,38 @@ async function loadStars() {
   } catch { /* offline or rate limited: keep the plain "Star" label */ }
 }
 
+// ------------------------------------------------------------ star nudge
+
+const NUDGE_KEY = 'larpcode:star-nudge';
+let nudgeShown = false;
+
+export function nudgeStar() {
+  if (nudgeShown) return;
+  try { if (localStorage.getItem(NUDGE_KEY)) return; } catch { /* ignore */ }
+  nudgeShown = true;
+  const el = document.createElement('div');
+  el.className = 'star-nudge';
+  el.setAttribute('role', 'dialog');
+  el.setAttribute('aria-label', 'Star LARPcode on GitHub');
+  el.innerHTML = `
+    ${CLAWD}
+    <div class="star-nudge-text">
+      <b>Clawd did all this for free.</b>
+      <span>If LARPcode made you look cracked, a GitHub star keeps it alive.</span>
+    </div>
+    <a class="star-nudge-btn" href="${REPO_URL}" target="_blank" rel="noopener">${icon('star')}Star</a>
+    <button type="button" class="st-iconbtn" aria-label="Dismiss">${icon('x')}</button>`;
+  const close = () => {
+    el.classList.remove('is-on');
+    try { localStorage.setItem(NUDGE_KEY, '1'); } catch { /* ignore */ }
+    setTimeout(() => el.remove(), 300);
+  };
+  el.querySelector('button').addEventListener('click', close);
+  el.querySelector('a').addEventListener('click', close);
+  document.body.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-on')));
+}
+
 export function initStudio() {
   root = document.createElement('aside');
   root.className = 'studio';
@@ -374,5 +406,7 @@ export function initStudio() {
   store.subscribe(sync);
   sync(store.state);
   loadStars();
+  // Ask for a star once people have had time to play with it.
+  setTimeout(() => { if (!document.body.classList.contains('shot')) nudgeStar(); }, 45000);
   return root;
 }
