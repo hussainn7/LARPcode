@@ -50,6 +50,7 @@ function commitField(el, text) {
     if (!t) return;
     if (key === 'section') s.sections[+el.dataset.si].name = t;
     else if (key === 'item') s.sections[+el.dataset.si].items[+el.dataset.ii].title = t;
+    else if (key === 'modelname') s.models[+el.dataset.mi].name = t;
     else if (key in s) s[key] = t;
   });
 }

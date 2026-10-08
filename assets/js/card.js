@@ -58,6 +58,37 @@ function setText(el, text) {
   if (el !== document.activeElement && el.textContent !== text) el.textContent = text;
 }
 
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+})[c]);
+
+// Models tab: one tile per model with its share of the range's tokens.
+function renderModels(s, stats) {
+  const view = card().querySelector('[data-view="models"]');
+  if (view.contains(document.activeElement)) return;
+  const total = s.models.reduce((a, m) => a + (+m.share || 0), 0) || 1;
+  const rows = s.models
+    .map((m, i) => ({ ...m, i, pct: (m.share / total) * 100 }))
+    .sort((a, b) => b.pct - a.pct);
+  const html = `
+    <div class="mrows">
+      ${rows.map((m, rank) => `
+        <div class="mrow">
+          <div class="mrow-top">
+            <span class="mrow-name" data-edit="modelname" data-mi="${m.i}">${esc(m.name)}</span>
+            <span class="mrow-val">${fmtTokens((stats.tokens * m.pct) / 100)}<em>${m.pct < 1 && m.pct > 0 ? '<1' : Math.round(m.pct)}%</em></span>
+          </div>
+          <div class="mrow-bar"><i data-rank="${Math.min(rank, 3)}" style="width:${m.pct.toFixed(2)}%"></i></div>
+        </div>`).join('')}
+    </div>
+    <p class="fact">${esc(factText(s, stats.tokens))}</p>`;
+  if (view.dataset.html !== html) {
+    view.innerHTML = html;
+    view.dataset.html = html;
+  }
+  view.querySelector('.fact').hidden = !s.show.fact;
+}
+
 export function renderCard(s) {
   if (!card().dataset.built) build();
   const root = card();
@@ -74,4 +105,5 @@ export function renderCard(s) {
   fact.hidden = !s.show.fact;
 
   renderHeat(s);
+  renderModels(s, stats);
 }

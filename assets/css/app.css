@@ -368,6 +368,40 @@ svg { display: block; flex: none; }
   color: var(--t3);
 }
 
+/* Models tab */
+
+.mrows { display: flex; flex-direction: column; gap: 4px; }
+
+.mrow {
+  height: 44px;
+  padding: 5px 6px 0 4px;
+  border-radius: 4px;
+  background: var(--tile);
+}
+.mrow-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13.4px;
+  line-height: 19px;
+  white-space: nowrap;
+}
+.mrow-name { color: var(--t1); overflow: hidden; text-overflow: ellipsis; }
+.mrow-val { color: var(--t1); font-weight: 600; font-variant-numeric: tabular-nums; }
+.mrow-val em { margin-left: 8px; font-style: normal; font-weight: 400; color: var(--t3); }
+.mrow-bar {
+  height: 6px;
+  margin: 7px 0 0;
+  border-radius: 3px;
+  background: #2b2b2b;
+  overflow: hidden;
+}
+.mrow-bar i { display: block; height: 100%; border-radius: 3px; background: var(--heat-4); }
+.mrow-bar i[data-rank="1"] { background: var(--heat-3); }
+.mrow-bar i[data-rank="2"] { background: var(--heat-2); }
+.mrow-bar i[data-rank="3"] { background: var(--heat-1); }
+
 /* ------------------------------------------------------------- composer */
 
 .composer-area {
