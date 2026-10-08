@@ -315,6 +315,73 @@ select.st-input option { background: #242423; color: var(--t1); }
 .st-foot a { color: var(--t3); }
 .st-foot .st-link { color: var(--t3); text-decoration: underline; text-underline-offset: 2px; }
 
+/* -------------------------------------------------------------- actions */
+
+.st-actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 12px 14px 14px;
+  border-top: 1px solid var(--s-line);
+  background: var(--s-bg);
+}
+.st-cta {
+  flex: 1;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-right: 6px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--clay);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.st-cta:hover { background: #c6613f; }
+.st-cta kbd { background: rgba(0, 0, 0, 0.18); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+.st-act { width: 36px; height: 36px; margin: 0; border: 1px solid var(--s-line); background: var(--s-raise); color: var(--t2); }
+
+/* ------------------------------------------------------ screenshot mode */
+
+.shot .studio,
+.shot .st-launch,
+.exporting .st-launch { display: none !important; }
+.shot .main { scrollbar-width: none; }
+.shot .main::-webkit-scrollbar { display: none; }
+
+.hero.is-exporting {
+  width: 560px;
+  padding: 36px 40px 40px;
+  background: var(--bg-main);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 100;
+  max-width: calc(100vw - 32px);
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(36, 36, 35, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  color: var(--t1);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
 /* ------------------------------------------------------------- launcher */
 
 .st-launch {

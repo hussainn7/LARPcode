@@ -6,6 +6,7 @@ import {
 import { fmtInt, fmtTokens, fmtHour } from './format.js';
 import { rangeStats, countActive, HEAT_STYLES, bookFor, visibleDays } from './stats.js';
 import { brush, commitStat } from './edit.js';
+import { enterShot, fullscreenShot, exportPng, copyShareLink } from './share.js';
 
 export const REPO = 'hussainn7/LARPcode';
 export const REPO_URL = `https://github.com/${REPO}`;
@@ -138,13 +139,18 @@ function template() {
       <button type="button" class="st-chip st-mt" data-action="shuffle">${icon('dice')}Shuffle sidebar sessions</button>
     </section>
 
-    <section class="st-sec" id="st-share"></section>
-
     <footer class="st-foot">
       A parody. Not affiliated with or endorsed by Anthropic; Claude and the Claude logo are Anthropic trademarks.
       <a href="${REPO_URL}" target="_blank" rel="noopener">Source on GitHub</a> ·
       <button type="button" class="st-link" data-action="reset">Reset everything</button>
     </footer>
+  </div>
+
+  <div class="st-actions">
+    <button type="button" class="st-cta" data-action="shot">${icon('camera')}Screenshot mode<kbd>S</kbd></button>
+    <button type="button" class="st-iconbtn st-act" data-action="png-card" title="Download card as PNG" aria-label="Download card as PNG">${icon('download')}</button>
+    <button type="button" class="st-iconbtn st-act" data-action="fullscreen" title="Fullscreen screenshot mode" aria-label="Fullscreen screenshot mode"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><path d="M2.75 6V2.75H6M10 2.75h3.25V6M13.25 10v3.25H10M6 13.25H2.75V10"/></svg></button>
+    <button type="button" class="st-iconbtn st-act" data-action="link" title="Copy share link" aria-label="Copy share link">${icon('link')}</button>
   </div>`;
 }
 
@@ -284,6 +290,10 @@ function onClick(e) {
   } else if (action === 'reset') {
     if (confirm('Reset every stat, label and setting back to the defaults?')) store.reset();
   } else if (action === 'close') setOpen(false);
+  else if (action === 'shot') enterShot();
+  else if (action === 'fullscreen') fullscreenShot();
+  else if (action === 'png-card') exportPng('card');
+  else if (action === 'link') copyShareLink();
 }
 
 function onInput(e) {
