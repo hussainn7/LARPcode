@@ -1,0 +1,25 @@
+# GitHub Pages serves this repo from the gh-pages branch.
+# Mirror main onto it on every push so the live site stays current.
+name: Sync gh-pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Point gh-pages at main
+        run: git push --force origin HEAD:refs/heads/gh-pages

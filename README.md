@@ -61,6 +61,8 @@ Then open http://localhost:8000. ES modules don't load over `file://`, so you do
 3. Under **Build and deployment**, choose **Deploy from a branch**, then pick `main` and `/ (root)`.
 4. After about a minute, the site is live at `https://<you>.github.io/LARPcode/`.
 
+This repo itself publishes from the `gh-pages` branch. A small workflow (`.github/workflows/pages.yml`) mirrors `main` onto it on every push, so pushing to `main` is all it takes to update the live site.
+
 ## Project layout
 
 ```
