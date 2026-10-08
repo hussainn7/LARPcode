@@ -1,6 +1,7 @@
 import { store } from './state.js';
 import { renderShell } from './render.js';
 import { renderCard } from './card.js';
+import { initStudio, setOpen, isOpen } from './studio.js';
 import './edit.js';
 
 function render(state) {
@@ -18,6 +19,14 @@ document.getElementById('card').addEventListener('click', (e) => {
   });
 });
 
+const typing = (el) => el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName);
+
+document.addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey || typing(e.target)) return;
+  if (e.key === 'e' || e.key === 'E') setOpen(!isOpen());
+});
+
 document.body.classList.add('editing');
 store.subscribe(render);
 render(store.state);
+initStudio();

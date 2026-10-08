@@ -12,7 +12,7 @@ export const brush = { level: 'cycle' };
 
 const NUMERIC = new Set(['sessions', 'messages', 'tokens', 'activeDays']);
 
-function commitStat(key, text) {
+export function commitStat(key, text) {
   store.update((s) => {
     if (key === 'fact') {
       const t = text.trim();

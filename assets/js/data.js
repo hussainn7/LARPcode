@@ -86,9 +86,33 @@ export const PROJECT_POOL = [
   'search', 'ml-platform', 'api', 'design-system', 'cli', 'data-pipeline',
 ];
 
+// One-click personas. `heat` names a generator in stats.js (or 'screenshot').
+export const PRESETS = [
+  {
+    id: 'fresh', label: 'Fresh install', plan: 'Max', heat: 'screenshot',
+    stats: { sessions: 242, messages: 20914, tokens: 3058100000, peakHour: 17, favoriteModel: 'Opus 5.5' },
+  },
+  {
+    id: 'weekend', label: 'Weekend hacker', plan: 'Pro', heat: 'weekends',
+    stats: { sessions: 96, messages: 5321, tokens: 412600000, peakHour: 23, favoriteModel: 'Sonnet 5.5' },
+  },
+  {
+    id: 'staff', label: 'Staff engineer', plan: 'Max', heat: 'weekdays',
+    stats: { sessions: 1284, messages: 96113, tokens: 27400000000, peakHour: 10, favoriteModel: 'Opus 5.5' },
+  },
+  {
+    id: 'whale', label: 'Token whale', plan: 'Max', heat: 'grind',
+    stats: { sessions: 4812, messages: 412775, tokens: 184200000000, peakHour: 3, favoriteModel: 'Opus 5.5' },
+  },
+  {
+    id: 'unhinged', label: 'Unhinged', plan: 'Enterprise', heat: 'max',
+    stats: { sessions: 69420, messages: 4206969, tokens: 1337000000000, peakHour: 4, favoriteModel: 'Fable 5.1' },
+  },
+];
+
 // Heatmap: index 0 is today, index 1 is yesterday, and so on.
 // This is the pattern from the reference screenshot (12 active days).
-const SCREENSHOT_HEAT = { 0: 3, 1: 2, 2: 4, 3: 1, 4: 2, 5: 1, 6: 1, 7: 2, 8: 3, 9: 1, 14: 2, 15: 1 };
+export const SCREENSHOT_HEAT ={ 0: 3, 1: 2, 2: 4, 3: 1, 4: 2, 5: 1, 6: 1, 7: 2, 8: 3, 9: 1, 14: 2, 15: 1 };
 export const HEAT_DAYS = 26 * 7;
 export const heatFromMap = (map) => Array.from({ length: HEAT_DAYS }, (_, d) => map[d] || 0);
 

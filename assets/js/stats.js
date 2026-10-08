@@ -1,5 +1,5 @@
 // Heatmap math, range stats and the book fun fact.
-import { BOOKS, HEAT_DAYS } from './data.js';
+import { BOOKS, HEAT_DAYS, SCREENSHOT_HEAT, heatFromMap } from './data.js';
 
 // The grid is 26 week-columns, Sunday on top, ending on today's weekday,
 // so the last column is only partly filled.
@@ -60,6 +60,7 @@ const fill = (fn) => {
 };
 
 export const HEAT_STYLES = {
+  screenshot: () => heatFromMap(SCREENSHOT_HEAT),
   grind: () => fill(() => pickLevel([1, 2, 4, 5])),
   ramp: () => fill((d, _, days) => {
     const t = 1 - d / days; // 0 = oldest, 1 = today
